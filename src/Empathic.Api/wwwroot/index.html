@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Empathic Cultural Network</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="hero">
+  <div>
+    <span class="eyebrow">CULTURE • TRUST • PROVENANCE</span>
+    <h1>Empathic Cultural Network</h1>
+    <p>Protect authorship, preserve cultural legacy and create transparent value for artists, scholars and communities.</p>
+  </div>
+  <div class="badge">Phase 1 MVP<br><strong>Registry & Archive</strong></div>
+</header>
+
+<main>
+  <section class="stats" id="stats"></section>
+
+  <section class="grid two">
+    <article class="card">
+      <h2>1. Register creator</h2>
+      <form id="creatorForm">
+        <label>Name<input name="displayName" required placeholder="Creator / scholar / institution" /></label>
+        <label>Institution<input name="institution" placeholder="Optional" /></label>
+        <label>Country<input name="country" placeholder="Italy" /></label>
+        <label>Roles<input name="roles" placeholder="Poet, Artist, Scholar" /></label>
+        <button>Register creator</button>
+      </form>
+    </article>
+
+    <article class="card">
+      <h2>2. Register cultural work</h2>
+      <form id="workForm">
+        <label>Creator<select name="creatorId" id="creatorSelect" required></select></label>
+        <label>Title<input name="title" required placeholder="Title of work" /></label>
+        <label>Type<select name="workType"><option>Poetry</option><option>Painting</option><option>Manifesto</option><option>Performance</option><option>Music</option><option>Research</option><option>Other</option></select></label>
+        <label>Description<textarea name="description" rows="3"></textarea></label>
+        <label>URI<input name="externalUri" placeholder="https://... or ipfs://..." /></label>
+        <label>Content fingerprint source<textarea name="contentFingerprintSource" rows="3" placeholder="Paste canonical text, file hash, CID, or metadata to fingerprint"></textarea></label>
+        <button>Register provenance</button>
+      </form>
+    </article>
+  </section>
+
+  <section class="card">
+    <div class="section-head">
+      <div><span class="eyebrow">PROVENANCE LEDGER</span><h2>Registered works</h2></div>
+      <button class="secondary" onclick="loadWorks()">Refresh</button>
+    </div>
+    <div id="works"></div>
+  </section>
+
+  <section class="card verify">
+    <h2>Public verification</h2>
+    <p>Paste a SHA-256 content hash to check whether the work exists in the provenance registry.</p>
+    <div class="inline"><input id="verifyHash" placeholder="64-character SHA-256 hash"/><button onclick="verifyHash()">Verify</button></div>
+    <pre id="verifyResult">No verification performed yet.</pre>
+  </section>
+</main>
+
+<footer>Empathic Cultural Network • Phase 1 prototype</footer>
+<script src="app.js"></script>
+</body>
+</html>
