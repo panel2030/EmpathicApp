@@ -1,0 +1,16 @@
+@host = http://localhost:5000
+
+### Dashboard
+GET {{host}}/api/dashboard
+
+### Create creator
+POST {{host}}/api/creators
+Content-Type: application/json
+
+{
+  "displayName": "Example Poet",
+  "institution": "Empathic Cultural Network",
+  "country": "Italy",
+  "website": null,
+  "roles": ["Poet", "Scholar"]
+}
