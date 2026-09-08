@@ -7,4 +7,5 @@ public sealed record Creator(
     string? Country,
     string? Website,
     string[] Roles,
-    DateTimeOffset CreatedAtUtc);
+    DateTimeOffset CreatedAtUtc,
+    bool IsVerified = false);
