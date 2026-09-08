@@ -5,4 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>false</InvariantGlobalization>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Empathic.Application\Empathic.Application.csproj" />
+    <ProjectReference Include="..\Empathic.Domain\Empathic.Domain.csproj" />
+    <ProjectReference Include="..\Empathic.Infrastructure\Empathic.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>
