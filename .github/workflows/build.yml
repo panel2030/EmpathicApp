@@ -26,3 +26,6 @@ jobs:
 
       - name: Build
         run: dotnet build EmpathicCulturalNetwork.sln --configuration Release --no-restore
+
+      - name: Publish API
+        run: dotnet publish src/Empathic.Api/Empathic.Api.csproj --configuration Release --no-build --output ./publish
