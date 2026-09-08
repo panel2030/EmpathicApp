@@ -1,4 +1,4 @@
-namespace Empathic.Api.Models;
+namespace Empathic.Domain.Entities;
 
 public sealed record Creator(
     Guid Id,
