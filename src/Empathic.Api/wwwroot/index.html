@@ -3,65 +3,214 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Empathic Cultural Network</title>
+  <meta name="description" content="The Empathic Movement connects culture, empathy, technology and verified positive participation. Explore the EMPATH utility concept, Proof of Empathy, cultural provenance and the live registry prototype." />
+  <meta name="theme-color" content="#0b2530" />
+  <meta property="og:title" content="The Empathic Movement" />
+  <meta property="og:description" content="Culture × Empathy × Humanity × Technology." />
+  <meta property="og:type" content="website" />
+  <title>The Empathic Movement | Humanity, rewarded.</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header class="hero">
-  <div>
-    <span class="eyebrow">CULTURE • TRUST • PROVENANCE</span>
-    <h1>Empathic Cultural Network</h1>
-    <p>Protect authorship, preserve cultural legacy and create transparent value for artists, scholars and communities.</p>
-  </div>
-  <div class="badge">Phase 1 MVP<br><strong>Registry & Archive</strong></div>
-</header>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<main>
-  <section class="stats" id="stats"></section>
-
-  <section class="grid two">
-    <article class="card">
-      <h2>1. Register creator</h2>
-      <form id="creatorForm">
-        <label>Name<input name="displayName" required placeholder="Creator / scholar / institution" /></label>
-        <label>Institution<input name="institution" placeholder="Optional" /></label>
-        <label>Country<input name="country" placeholder="Italy" /></label>
-        <label>Roles<input name="roles" placeholder="Poet, Artist, Scholar" /></label>
-        <button>Register creator</button>
-      </form>
-    </article>
-
-    <article class="card">
-      <h2>2. Register cultural work</h2>
-      <form id="workForm">
-        <label>Creator<select name="creatorId" id="creatorSelect" required></select></label>
-        <label>Title<input name="title" required placeholder="Title of work" /></label>
-        <label>Type<select name="workType"><option>Poetry</option><option>Painting</option><option>Manifesto</option><option>Performance</option><option>Music</option><option>Research</option><option>Other</option></select></label>
-        <label>Description<textarea name="description" rows="3"></textarea></label>
-        <label>URI<input name="externalUri" placeholder="https://... or ipfs://..." /></label>
-        <label>Content fingerprint source<textarea name="contentFingerprintSource" rows="3" placeholder="Paste canonical text, file hash, CID, or metadata to fingerprint"></textarea></label>
-        <button>Register provenance</button>
-      </form>
-    </article>
-  </section>
-
-  <section class="card">
-    <div class="section-head">
-      <div><span class="eyebrow">PROVENANCE LEDGER</span><h2>Registered works</h2></div>
-      <button class="secondary" onclick="loadWorks()">Refresh</button>
+  <header class="site-header" id="top">
+    <div class="nav-shell">
+      <a class="brand" href="#top" aria-label="Empathic Movement home">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span><strong>EMPATHIC</strong><small>THE MOVEMENT</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+        <a href="#movement">Movement</a>
+        <a href="#proof">Proof of Empathy</a>
+        <a href="#culture">Culture</a>
+        <a href="#empath">EMPATH</a>
+        <a href="#founders">Founders</a>
+        <a href="#roadmap">Roadmap</a>
+        <a class="nav-cta" href="platform.html">Open prototype</a>
+      </nav>
     </div>
-    <div id="works"></div>
-  </section>
+  </header>
 
-  <section class="card verify">
-    <h2>Public verification</h2>
-    <p>Paste a SHA-256 content hash to check whether the work exists in the provenance registry.</p>
-    <div class="inline"><input id="verifyHash" placeholder="64-character SHA-256 hash"/><button onclick="verifyHash()">Verify</button></div>
-    <pre id="verifyResult">No verification performed yet.</pre>
-  </section>
-</main>
+  <main id="main">
+    <section class="hero-section">
+      <div class="hero-glow hero-glow-one"></div>
+      <div class="hero-glow hero-glow-two"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="kicker"><span class="status-dot"></span> CULTURE × EMPATHY × HUMANITY × TECHNOLOGY</span>
+          <h1>Humanity,<br><em>rewarded.</em></h1>
+          <p class="hero-lead">The Empathic Movement is a cultural and technology initiative designed to turn meaningful participation into trusted recognition, shared experiences and measurable positive impact.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#movement">Discover the movement</a>
+            <a class="button button-ghost" href="platform.html">Explore the live prototype <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="trust-row">
+            <span>Supported by <strong>Menotti Lerro</strong> and <strong>FNG</strong></span>
+            <span class="trust-divider"></span>
+            <span id="networkStatus">Prototype network checking…</span>
+          </div>
+        </div>
 
-<footer>Empathic Cultural Network • Phase 1 prototype</footer>
-<script src="app.js"></script>
+        <div class="hero-visual reveal" aria-label="Empathic ecosystem visualisation">
+          <div class="orbit-card">
+            <div class="orbit orbit-a"></div>
+            <div class="orbit orbit-b"></div>
+            <div class="orbit orbit-c"></div>
+            <div class="core-token">
+              <span class="core-symbol">E</span>
+              <strong>EMPATH</strong>
+              <small>UTILITY LAYER</small>
+            </div>
+            <span class="node node-culture">Culture</span>
+            <span class="node node-impact">Impact</span>
+            <span class="node node-trust">Trust</span>
+            <span class="node node-community">Community</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="network-strip" aria-label="Prototype network statistics">
+      <div class="container stats-grid">
+        <div class="live-stat"><strong id="statCreators">—</strong><span>Creators registered</span></div>
+        <div class="live-stat"><strong id="statWorks">—</strong><span>Cultural works</span></div>
+        <div class="live-stat"><strong id="statAnchored">—</strong><span>Records anchored</span></div>
+        <div class="live-stat"><strong>3</strong><span>Digital layers</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="movement">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">THE MOVEMENT</span>
+          <h2>Empathy should be something we <em>practice</em>, not just something we talk about.</h2>
+          <p>The platform brings culture, verified participation and digital infrastructure into one ecosystem. The aim is simple: help people discover, participate, prove positive contribution and unlock meaningful experiences.</p>
+        </div>
+
+        <div class="loop-grid">
+          <article class="loop-card reveal"><span class="step-number">01</span><div class="loop-icon">◎</div><h3>Discover</h3><p>Explore poetry, art, heritage, learning and community-led experiences that encourage perspective and connection.</p></article>
+          <article class="loop-card reveal"><span class="step-number">02</span><div class="loop-icon">◇</div><h3>Participate</h3><p>Join cultural, educational and community activities with clear participation criteria and responsible verification.</p></article>
+          <article class="loop-card reveal"><span class="step-number">03</span><div class="loop-icon">✓</div><h3>Verify</h3><p>Generate trusted evidence of participation through the Proof of Empathy framework and tamper-evident records.</p></article>
+          <article class="loop-card reveal"><span class="step-number">04</span><div class="loop-icon">E</div><h3>Recognise</h3><p>Receive credentials, access, recognition or EMPATH utility rewards where the programme rules allow it.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="proof">
+      <div class="container proof-grid">
+        <div class="proof-copy reveal">
+          <span class="eyebrow light">PROOF OF EMPATHY</span>
+          <h2>Positive participation deserves trusted evidence.</h2>
+          <p>Proof of Empathy is the platform's verification framework for recording that an eligible cultural, educational or community activity happened. It is not a blockchain consensus mechanism and it does not attempt to score a person's emotions.</p>
+          <div class="proof-flow" aria-label="Proof of Empathy process">
+            <span>Activity</span><b>→</b><span>Evidence</span><b>→</b><span>Verification</span><b>→</b><span>Credential</span><b>→</b><span>Recognition</span>
+          </div>
+          <a class="text-link light-link" href="platform.html">See provenance verification in the prototype →</a>
+        </div>
+        <div class="proof-panel reveal">
+          <div class="proof-panel-header"><span class="tiny-label">EXAMPLE CREDENTIAL</span><span class="verified-pill">VERIFIED</span></div>
+          <div class="credential-mark">E</div>
+          <h3>Empathy Participation Credential</h3>
+          <p>Issued after approved evidence is validated by an authorised organiser or programme partner.</p>
+          <dl class="credential-data"><div><dt>Credential</dt><dd>EMP-POE-000001</dd></div><div><dt>Type</dt><dd>Non-transferable</dd></div><div><dt>Evidence</dt><dd>Hash anchored</dd></div><div><dt>Status</dt><dd>Verified</dd></div></dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="culture">
+      <div class="container">
+        <div class="split-heading reveal">
+          <div><span class="eyebrow">CULTURAL ENGINE</span><h2>Culture is the front door.</h2></div>
+          <p>Poetry, art, literature and heritage can create the emotional and intellectual spaces where empathy becomes tangible. The platform adds provenance, storytelling and participation without reducing culture to a financial product.</p>
+        </div>
+
+        <div class="culture-grid">
+          <article class="feature feature-wide reveal"><div class="feature-visual poetry-visual"><span>“</span><div class="poem-lines"><i></i><i></i><i></i><i></i></div></div><div><span class="tiny-label">POETRY & LITERATURE</span><h3>Stories that travel further</h3><p>Creator profiles, multilingual interpretation, audio experiences and provenance-linked cultural archives.</p></div></article>
+          <article class="feature reveal"><div class="feature-icon">▱</div><span class="tiny-label">ART & HERITAGE</span><h3>Digital cultural passports</h3><p>Connect physical and digital works to authorship, provenance, exhibition history and trusted records.</p></article>
+          <article class="feature reveal"><div class="feature-icon">◌</div><span class="tiny-label">AI EXPERIENCE</span><h3>Ask with context</h3><p>Future AI guides can help visitors explore cultural meaning, history and interpretation while clearly separating verified facts from generated explanation.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section token-section" id="empath">
+      <div class="container token-grid">
+        <div class="token-visual reveal">
+          <div class="token-coin"><div class="token-ring"><span>E</span></div></div>
+          <div class="token-caption"><strong>EMPATH</strong><span>Working utility-token concept</span></div>
+        </div>
+        <div class="token-copy reveal">
+          <span class="eyebrow">EMPATH UTILITY LAYER</span>
+          <h2>A token with a job to do.</h2>
+          <p>EMPATH is being designed as a utility and recognition layer for the ecosystem—not as company equity and not as a promise of financial return.</p>
+          <div class="utility-list">
+            <div><span>01</span><p><strong>Recognition</strong><br>Reward eligible verified participation.</p></div>
+            <div><span>02</span><p><strong>Access</strong><br>Unlock selected cultural content and experiences.</p></div>
+            <div><span>03</span><p><strong>Membership</strong><br>Support programme tiers and community privileges.</p></div>
+            <div><span>04</span><p><strong>Participation</strong><br>Enable non-financial community choices where appropriate.</p></div>
+          </div>
+          <div class="notice"><strong>Launch status:</strong> EMPATH is currently a design concept for the platform. No public token sale is offered on this website.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="founders">
+      <div class="container">
+        <div class="section-heading compact reveal"><span class="eyebrow">FOUNDING SUPPORTERS</span><h2>Culture meets technology.</h2><p>The movement is supported by two complementary founding perspectives: cultural vision and technology strategy.</p></div>
+        <div class="founder-grid">
+          <article class="founder-card reveal"><div class="founder-monogram">ML</div><div><span class="tiny-label">FOUNDING CULTURAL CHAMPION</span><h3>Menotti Lerro</h3><p>Poetry, literature, cultural philosophy and creative direction for an empathy-centred cultural movement.</p><div class="tag-row"><span>Culture</span><span>Poetry</span><span>Humanism</span></div></div></article>
+          <article class="founder-card reveal"><div class="founder-monogram alternate">F</div><div><span class="tiny-label">FOUNDING TECHNOLOGY & STRATEGY CHAMPION</span><h3>FNG</h3><p>Blockchain, AI, digital platforms, traceability and commercial architecture for a scalable global ecosystem.</p><div class="tag-row"><span>Blockchain</span><span>AI</span><span>Strategy</span></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="container">
+        <div class="split-heading reveal"><div><span class="eyebrow">ROADMAP</span><h2>Build the utility before the hype.</h2></div><p>The roadmap deliberately starts with identity, provenance and participation. A tradable token—if ever introduced—comes only after real utility, adoption and legal review.</p></div>
+        <div class="roadmap">
+          <article class="roadmap-item active reveal"><span>NOW</span><div><h3>01 · Foundation</h3><p>Movement website, cultural registry, creator profiles, provenance hashes and live prototype.</p></div></article>
+          <article class="roadmap-item reveal"><span>NEXT</span><div><h3>02 · Participation</h3><p>Activities, organiser verification, Proof of Empathy credentials and member profiles.</p></div></article>
+          <article class="roadmap-item reveal"><span>THEN</span><div><h3>03 · Cultural experiences</h3><p>Digital passports, curated collections, AI-guided cultural discovery and partner programmes.</p></div></article>
+          <article class="roadmap-item reveal"><span>LATER</span><div><h3>04 · EMPATH utility</h3><p>Controlled reward and access mechanics, followed by jurisdiction-specific regulatory assessment before any wider token deployment.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq-section" id="faq">
+      <div class="container faq-grid">
+        <div class="reveal"><span class="eyebrow">FAQ</span><h2>Clear answers, no crypto fog machine.</h2></div>
+        <div class="accordion reveal">
+          <details><summary>Is EMPATH an investment token?</summary><p>No. The current design positions EMPATH as a utility and recognition mechanism. The platform does not promise returns, profit sharing or ownership of the operating company to token holders.</p></details>
+          <details><summary>Does Proof of Empathy judge whether someone is empathetic?</summary><p>No. It verifies eligible participation or evidence defined by a programme. It should not claim to measure a person's inner emotional state.</p></details>
+          <details><summary>Why use blockchain at all?</summary><p>For narrow cases where tamper-evident provenance, credentials or auditability add value. Ordinary application data stays off-chain where that is safer, cheaper and more private.</p></details>
+          <details><summary>Can museums, universities or cultural organisations participate?</summary><p>That is a core intended direction. Partner organisations could register activities, verify participation, issue cultural passports and run branded cultural programmes.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container cta-card reveal">
+        <div><span class="eyebrow light">PROTOTYPE V0.1</span><h2>See the technology behind the movement.</h2><p>The repository already includes a working provenance registry for creators and cultural works, plus content hashing and development blockchain anchoring.</p></div>
+        <a class="button button-light" href="platform.html">Open the platform prototype →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><a class="brand footer-brand" href="#top"><span class="brand-mark">E</span><span><strong>EMPATHIC</strong><small>THE MOVEMENT</small></span></a><p>Culture × Empathy × Humanity × Technology.</p></div>
+      <div><strong>Explore</strong><a href="#movement">Movement</a><a href="#proof">Proof of Empathy</a><a href="#empath">EMPATH</a><a href="platform.html">Prototype</a></div>
+      <div><strong>Project</strong><a href="#founders">Founders</a><a href="#roadmap">Roadmap</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+      <div class="footer-note"><strong>Important</strong><p>This is an early-stage technology and cultural platform. EMPATH is not currently offered for public sale. Nothing on this site is investment, financial or legal advice.</p></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> The Empathic Movement</span><span>Humanity, rewarded.</span></div>
+  </footer>
+
+  <script src="site.js" defer></script>
 </body>
 </html>

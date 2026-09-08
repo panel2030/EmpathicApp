@@ -1,0 +1,17 @@
+services:
+  empathic:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: empathic-movement
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+    volumes:
+      - empathic_data:/app/App_Data
+
+volumes:
+  empathic_data:
