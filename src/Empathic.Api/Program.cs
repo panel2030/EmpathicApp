@@ -10,14 +10,26 @@ var dataDirectory = Path.Combine(builder.Environment.ContentRootPath, "App_Data"
 builder.Services.AddSingleton(new JsonPlatformStore(dataDirectory));
 builder.Services.AddSingleton<ICreatorRepository>(sp => sp.GetRequiredService<JsonPlatformStore>());
 builder.Services.AddSingleton<ICulturalWorkRepository>(sp => sp.GetRequiredService<JsonPlatformStore>());
+builder.Services.AddSingleton<IMovementMemberRepository>(sp => sp.GetRequiredService<JsonPlatformStore>());
 builder.Services.AddSingleton<IHashingService, Sha256HashingService>();
 builder.Services.AddSingleton<IBlockchainAnchorService, DevelopmentBlockchainAnchorService>();
 builder.Services.AddSingleton<CreatorService>();
 builder.Services.AddSingleton<CulturalWorkService>();
 builder.Services.AddSingleton<ProvenanceService>();
 builder.Services.AddSingleton<DashboardService>();
+builder.Services.AddSingleton<MovementMemberService>();
 
 var app = builder.Build();
+
+app.Use(async (context, next) =>
+{
+    context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+    context.Response.Headers["X-Frame-Options"] = "DENY";
+    context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
+    context.Response.Headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()";
+    await next();
+});
+
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
@@ -100,6 +112,34 @@ app.MapGet("/api/verify/{hash}", async (
         work,
         creator = creator is null ? null : new { creator.Id, creator.DisplayName, creator.Institution, creator.Country, creator.Roles }
     });
+});
+
+var movement = app.MapGroup("/api/movement");
+movement.MapGet("/stats", async (MovementMemberService service, CancellationToken ct) =>
+    Results.Ok(await service.GetStatsAsync(ct)));
+
+movement.MapPost("/join", async (JoinMovementRequest request, MovementMemberService service, CancellationToken ct) =>
+{
+    try
+    {
+        var member = await service.JoinAsync(request, ct);
+        return Results.Created($"/api/movement/members/{member.Id}", new
+        {
+            member.Id,
+            member.DisplayName,
+            member.InterestType,
+            member.CreatedAtUtc,
+            message = "Welcome to the Empathic Movement. Your interest has been registered."
+        });
+    }
+    catch (DuplicateMemberException ex)
+    {
+        return Results.Conflict(new { message = ex.Message });
+    }
+    catch (ArgumentException ex)
+    {
+        return Results.BadRequest(new { message = ex.Message });
+    }
 });
 
 app.MapGet("/api/dashboard", async (DashboardService service, CancellationToken ct) =>
