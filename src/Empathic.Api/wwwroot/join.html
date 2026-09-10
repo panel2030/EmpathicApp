@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Join the Empathic Movement as a supporter, artist, cultural organisation, university, museum, technology partner or sponsor." />
+  <meta name="theme-color" content="#0b2530" />
+  <title>Join the Empathic Movement</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="join.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="Empathic Movement home"><span class="brand-mark">E</span><span><strong>EMPATHIC</strong><small>THE MOVEMENT</small></span></a>
+      <nav class="site-nav join-nav" aria-label="Join navigation">
+        <a href="index.html#movement">Movement</a>
+        <a href="index.html#proof">Proof of Empathy</a>
+        <a href="index.html#empath">EMPATH</a>
+        <a class="nav-cta" href="platform.html">Prototype</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="join-main">
+    <section class="join-hero">
+      <div class="container join-grid">
+        <div class="join-copy">
+          <span class="kicker"><span class="status-dot"></span> BECOME PART OF THE MOVEMENT</span>
+          <h1>Build a more <em>empathetic</em> future with us.</h1>
+          <p>The Empathic Movement brings together people, creators, cultural institutions, researchers and technology partners around one idea: empathy becomes stronger when it is practised, shared and recognised.</p>
+          <div class="join-benefits">
+            <div><strong>01</strong><span>Discover cultural experiences and projects.</span></div>
+            <div><strong>02</strong><span>Participate in future Proof of Empathy programmes.</span></div>
+            <div><strong>03</strong><span>Explore partnerships, exhibitions and research.</span></div>
+            <div><strong>04</strong><span>Help shape practical utility for EMPATH.</span></div>
+          </div>
+          <p class="join-note">Joining registers your interest in the movement. It does not purchase EMPATH, create an investment account or grant company ownership.</p>
+        </div>
+
+        <div class="join-card">
+          <span class="eyebrow">REGISTER INTEREST</span>
+          <h2>Join the movement</h2>
+          <p>Tell us how you would like to participate.</p>
+          <form id="joinForm" novalidate>
+            <label>Your name<input name="displayName" maxlength="120" required autocomplete="name" placeholder="Full name" /></label>
+            <label>Email<input name="email" type="email" maxlength="200" required autocomplete="email" placeholder="you@example.com" /></label>
+            <label>Country<input name="country" maxlength="100" autocomplete="country-name" placeholder="Optional" /></label>
+            <label>I am interested as
+              <select name="interestType" required>
+                <option value="Supporter">Supporter</option>
+                <option value="Artist or Writer">Artist or Writer</option>
+                <option value="Museum or Gallery">Museum or Gallery</option>
+                <option value="University or Research">University or Research</option>
+                <option value="Cultural Organisation">Cultural Organisation</option>
+                <option value="Technology Partner">Technology Partner</option>
+                <option value="Sponsor or Funder">Sponsor or Funder</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+            <label>Message<textarea name="message" maxlength="1000" rows="5" placeholder="What would you like to explore with the movement?"></textarea></label>
+            <label class="consent"><input name="consent" type="checkbox" required /><span>I agree that my details may be stored so the Empathic Movement can respond to this request. See the <a href="privacy.html">privacy notice</a>.</span></label>
+            <button class="button button-primary join-submit" type="submit">Register my interest</button>
+            <div id="joinResult" class="join-result" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer compact-footer">
+    <div class="container footer-bottom"><span>© <span id="year"></span> The Empathic Movement</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span></div>
+  </footer>
+  <script src="join.js" defer></script>
+</body>
+</html>
