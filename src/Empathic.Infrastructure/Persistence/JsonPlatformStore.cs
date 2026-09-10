@@ -4,7 +4,7 @@ using Empathic.Domain.Entities;
 
 namespace Empathic.Infrastructure.Persistence;
 
-public sealed class JsonPlatformStore(string dataDirectory) : ICreatorRepository, ICulturalWorkRepository
+public sealed class JsonPlatformStore(string dataDirectory) : ICreatorRepository, ICulturalWorkRepository, IMovementMemberRepository
 {
     private readonly SemaphoreSlim _gate = new(1, 1);
     private readonly string _dataDirectory = EnsureDirectory(dataDirectory);
@@ -14,6 +14,12 @@ public sealed class JsonPlatformStore(string dataDirectory) : ICreatorRepository
 
     async Task<IReadOnlyList<CulturalWork>> ICulturalWorkRepository.GetAllAsync(CancellationToken ct) =>
         await ReadAsync<CulturalWork>("works.json", ct);
+
+    public async Task<int> CountAsync(CancellationToken ct = default) =>
+        (await ReadAsync<MovementMember>("members.json", ct)).Count;
+
+    public async Task<MovementMember?> FindByEmailAsync(string email, CancellationToken ct = default) =>
+        (await ReadAsync<MovementMember>("members.json", ct)).FirstOrDefault(x => x.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
 
     public async Task<Creator?> GetAsync(Guid id, CancellationToken ct = default) =>
         (await ReadAsync<Creator>("creators.json", ct)).FirstOrDefault(x => x.Id == id);
@@ -29,6 +35,9 @@ public sealed class JsonPlatformStore(string dataDirectory) : ICreatorRepository
 
     async Task ICulturalWorkRepository.AddAsync(CulturalWork work, CancellationToken ct) =>
         await AppendAsync("works.json", work, ct);
+
+    public async Task AddAsync(MovementMember member, CancellationToken ct = default) =>
+        await AppendAsync("members.json", member, ct);
 
     public async Task UpdateAsync(CulturalWork work, CancellationToken ct = default)
     {
