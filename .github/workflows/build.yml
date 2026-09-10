@@ -34,6 +34,9 @@ jobs:
         shell: bash
         run: |
           test -f ./publish/wwwroot/index.html
+          test -f ./publish/wwwroot/join.html
+          test -f ./publish/wwwroot/join.css
+          test -f ./publish/wwwroot/join.js
           test -f ./publish/wwwroot/platform.html
           test -f ./publish/wwwroot/styles.css
           test -f ./publish/wwwroot/site.js

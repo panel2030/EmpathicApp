@@ -2,6 +2,25 @@
   const menuToggle = document.getElementById('menuToggle');
   const siteNav = document.getElementById('siteNav');
 
+  if (siteNav && !siteNav.querySelector('a[href="join.html"]')) {
+    const prototypeLink = siteNav.querySelector('.nav-cta');
+    const joinLink = document.createElement('a');
+    joinLink.href = 'join.html';
+    joinLink.textContent = 'Join';
+    joinLink.className = 'join-link';
+    if (prototypeLink) siteNav.insertBefore(joinLink, prototypeLink);
+    else siteNav.appendChild(joinLink);
+  }
+
+  const heroActions = document.querySelector('.hero-actions');
+  if (heroActions && !heroActions.querySelector('a[href="join.html"]')) {
+    const joinButton = document.createElement('a');
+    joinButton.href = 'join.html';
+    joinButton.className = 'button button-primary';
+    joinButton.textContent = 'Join the movement';
+    heroActions.insertBefore(joinButton, heroActions.firstChild);
+  }
+
   if (menuToggle && siteNav) {
     menuToggle.addEventListener('click', () => {
       const isOpen = siteNav.classList.toggle('open');
@@ -40,9 +59,10 @@
   async function loadNetworkStatus() {
     const status = document.getElementById('networkStatus');
     try {
-      const [healthResponse, dashboardResponse] = await Promise.all([
+      const [healthResponse, dashboardResponse, movementResponse] = await Promise.all([
         fetch('/health', { headers: { Accept: 'application/json' } }),
-        fetch('/api/dashboard', { headers: { Accept: 'application/json' } })
+        fetch('/api/dashboard', { headers: { Accept: 'application/json' } }),
+        fetch('/api/movement/stats', { headers: { Accept: 'application/json' } })
       ]);
 
       if (!healthResponse.ok || !dashboardResponse.ok) throw new Error('API unavailable');
@@ -50,6 +70,14 @@
       setText('statCreators', dashboard.creators ?? 0);
       setText('statWorks', dashboard.works ?? 0);
       setText('statAnchored', dashboard.anchoredWorks ?? 0);
+
+      if (movementResponse.ok) {
+        const movement = await movementResponse.json();
+        const stats = document.querySelectorAll('.live-stat');
+        const finalStat = stats[stats.length - 1];
+        if (finalStat) finalStat.innerHTML = `<strong>${Number(movement.members ?? 0)}</strong><span>Movement supporters</span>`;
+      }
+
       if (status) status.textContent = 'Prototype network online';
     } catch {
       setText('statCreators', '0');

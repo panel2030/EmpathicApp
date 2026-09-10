@@ -18,6 +18,13 @@ public interface ICulturalWorkRepository
     Task UpdateAsync(CulturalWork work, CancellationToken ct = default);
 }
 
+public interface IMovementMemberRepository
+{
+    Task<int> CountAsync(CancellationToken ct = default);
+    Task<MovementMember?> FindByEmailAsync(string email, CancellationToken ct = default);
+    Task AddAsync(MovementMember member, CancellationToken ct = default);
+}
+
 public interface IHashingService
 {
     string Sha256(string value);
