@@ -12,6 +12,16 @@
     else siteNav.appendChild(joinLink);
   }
 
+  if (siteNav && !siteNav.querySelector('a[href="token-launch.html"]')) {
+    const prototypeLink = siteNav.querySelector('.nav-cta');
+    const tokenLink = document.createElement('a');
+    tokenLink.href = 'token-launch.html';
+    tokenLink.textContent = 'EMPATH launch';
+    tokenLink.className = 'token-launch-link';
+    if (prototypeLink) siteNav.insertBefore(tokenLink, prototypeLink);
+    else siteNav.appendChild(tokenLink);
+  }
+
   const heroActions = document.querySelector('.hero-actions');
   if (heroActions && !heroActions.querySelector('a[href="join.html"]')) {
     const joinButton = document.createElement('a');
@@ -19,6 +29,14 @@
     joinButton.className = 'button button-primary';
     joinButton.textContent = 'Join the movement';
     heroActions.insertBefore(joinButton, heroActions.firstChild);
+  }
+
+  if (heroActions && !heroActions.querySelector('a[href="token-launch.html"]')) {
+    const tokenButton = document.createElement('a');
+    tokenButton.href = 'token-launch.html';
+    tokenButton.className = 'button button-ghost';
+    tokenButton.textContent = 'Explore EMPATH pre-launch';
+    heroActions.appendChild(tokenButton);
   }
 
   if (menuToggle && siteNav) {
