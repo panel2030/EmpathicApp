@@ -37,6 +37,9 @@ jobs:
           test -f ./publish/wwwroot/join.html
           test -f ./publish/wwwroot/join.css
           test -f ./publish/wwwroot/join.js
+          test -f ./publish/wwwroot/token-launch.html
+          test -f ./publish/wwwroot/token-launch.css
+          test -f ./publish/wwwroot/token-launch.js
           test -f ./publish/wwwroot/platform.html
           test -f ./publish/wwwroot/styles.css
           test -f ./publish/wwwroot/site.js
