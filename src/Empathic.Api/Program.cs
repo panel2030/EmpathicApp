@@ -142,6 +142,49 @@ movement.MapPost("/join", async (JoinMovementRequest request, MovementMemberServ
     }
 });
 
+var token = app.MapGroup("/api/token");
+token.MapGet("/launch-config", (IConfiguration configuration) =>
+{
+    static int ReadPercent(IConfiguration config, string key, int fallback) =>
+        int.TryParse(config[key], out var value) && value >= 0 && value <= 100 ? value : fallback;
+
+    static string ReadText(IConfiguration config, string key, string fallback) =>
+        string.IsNullOrWhiteSpace(config[key]) ? fallback : config[key]!.Trim();
+
+    var founderOnePercent = ReadPercent(configuration, "TokenLaunch:Founder1Percent", 50);
+    var founderTwoPercent = ReadPercent(configuration, "TokenLaunch:Founder2Percent", 50);
+    var founderOneWallet = ReadText(configuration, "TokenLaunch:Founder1Wallet", "Not configured");
+    var founderTwoWallet = ReadText(configuration, "TokenLaunch:Founder2Wallet", "Not configured");
+
+    return Results.Ok(new
+    {
+        tokenName = ReadText(configuration, "TokenLaunch:TokenName", "Empathic Token"),
+        symbol = ReadText(configuration, "TokenLaunch:Symbol", "EMPATH"),
+        status = "prelaunch",
+        statusLabel = "Pre-launch · no public sale active",
+        saleEnabled = false,
+        allocationValid = founderOnePercent + founderTwoPercent == 100,
+        founderAllocations = new[]
+        {
+            new
+            {
+                label = ReadText(configuration, "TokenLaunch:Founder1Label", "Founder 1"),
+                wallet = founderOneWallet,
+                percent = founderOnePercent,
+                configured = founderOneWallet != "Not configured"
+            },
+            new
+            {
+                label = ReadText(configuration, "TokenLaunch:Founder2Label", "Founder 2"),
+                wallet = founderTwoWallet,
+                percent = founderTwoPercent,
+                configured = founderTwoWallet != "Not configured"
+            }
+        },
+        note = "Public receiving addresses and allocation percentages are configurable. Private keys and seed phrases must remain outside the application and repository."
+    });
+});
+
 app.MapGet("/api/dashboard", async (DashboardService service, CancellationToken ct) =>
     Results.Ok(await service.GetAsync(ct)));
 

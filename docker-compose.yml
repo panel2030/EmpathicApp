@@ -10,6 +10,14 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://+:8080
+      TokenLaunch__TokenName: ${TOKEN_NAME:-Empathic Token}
+      TokenLaunch__Symbol: ${TOKEN_SYMBOL:-EMPATH}
+      TokenLaunch__Founder1Label: ${TOKEN_FOUNDER1_LABEL:-Menotti Lerro}
+      TokenLaunch__Founder1Wallet: ${TOKEN_FOUNDER1_WALLET:-}
+      TokenLaunch__Founder1Percent: ${TOKEN_FOUNDER1_PERCENT:-50}
+      TokenLaunch__Founder2Label: ${TOKEN_FOUNDER2_LABEL:-FNG}
+      TokenLaunch__Founder2Wallet: ${TOKEN_FOUNDER2_WALLET:-}
+      TokenLaunch__Founder2Percent: ${TOKEN_FOUNDER2_PERCENT:-50}
     volumes:
       - empathic_data:/app/App_Data
 
